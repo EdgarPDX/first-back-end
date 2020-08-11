@@ -34,7 +34,7 @@ app.get('/location', async(req, res) => {
     
 })
 
-function getWeather(lat,lon){
+async function getWeather(lat,lon){
     const response = await request.get(`https://api.weatherbit.io/v2.0/forecast/daily?&lat=38.123&lon=-78.543&key=${process.env.WEATHER_KEY}`)
     const forecastArray = response.map((weatherItem) => {
         return{
@@ -50,7 +50,7 @@ app.get('/weather', (req, res) => {
         const userLat = req.query.latitude;
         const userLon = req.query.longitude;
 
-        const mungedData = getWeather(userLat, userLon);
+        const mungedData = await getWeather(userLat, userLon);
         res.json(mungedData);
     } catch (e) {
         res.status(500).json({error: e.message})
