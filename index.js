@@ -3,6 +3,7 @@ const cors = require('cors')
 const app = express()
 const port = 3000
 const geoData = require('./data/geo.js')
+const weatherData = require('./data/weather.js')
 
 app.use(cors());
 
@@ -22,6 +23,31 @@ app.get('/location', (req, res) => {
     const mungedData = getLatLong(userInput)
   res.json (mungedData);
 })
+
+function getWeather(lat,lon){
+    const data = weatherData.data;
+    const forecastArray = data.map((weatherItem) => {
+        return{
+            forcast: weatherItem.weather.description,
+            time: new Date(weatherItem.ts * 1000),
+        };
+    })
+    return forecastArray;
+}
+
+app.get('/weather', (req, res) => {
+    try {
+        const userLat = req.query.latitude;
+        const userLon = req.query.longitude;
+
+        const mungedData = getWeather(userLat, userLon);
+        res.json(mungedData);
+    } catch (e) {
+        res.status(500).json({error: e.message})
+    }
+})
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
