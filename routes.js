@@ -34,8 +34,8 @@ app.get('/location', async(req, res) => {
     
 })
 
-async function getWeather(lat,lon){
-    const response = await request.get(`https://api.weatherbit.io/v2.0/forecast/daily?&lat=38.123&lon=-78.543&key=${process.env.WEATHER_KEY}`)
+async function getWeather(name){
+    const response = await request.get(`https://api.weatherbit.io/v2.0/forecast/daily?&&city=${cityName}&key=${process.env.WEATHER_KEY}`)
     const forecastArray = response.map((weatherItem) => {
         return{
             forcast: weatherItem.weather.description,
@@ -45,7 +45,7 @@ async function getWeather(lat,lon){
     return forecastArray;
 }
 
-app.get('/weather', (req, res) => {
+app.get('/weather', async(req, res) => {
     try {
         const userLat = req.query.latitude;
         const userLon = req.query.longitude;
