@@ -5,6 +5,8 @@ const port = process.env.PORT || 3000;
 const geoData = require('./data/geo.js')
 const weatherData = require('./data/weather.js')
 
+require('dotenv').config();
+
 app.use(cors());
 
 app.use(express.static('public'));
