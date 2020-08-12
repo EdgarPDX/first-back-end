@@ -52,7 +52,7 @@ async function getWeather(lat, lon){
 
 app.get('/weather', async(req, res) => {
     try {
-        const userlat = req.query.latitude;
+        const userLat = req.query.latitude;
         const userLon = req.query.longitude;
 
         const mungedData = await getWeather(userLat, userLon);
