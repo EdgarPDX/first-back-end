@@ -36,8 +36,10 @@ app.get('/location', async(req, res) => {
 
 async function getWeather(lat, lon){
     const response = await request.get(`https://api.weatherbit.io/v2.0/forecast/daily?&lat=${lat}lon=${lon}&key=${process.env.WEATHER_KEY}`);
+    console.log(response.body.data)
 
     const forecast = response.body.data.map((day) => {
+
 
          return{
             forecast: day.weather.description,
