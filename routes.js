@@ -48,10 +48,10 @@ async function getWeather(cityName){
 
 app.get('/weather', async(req, res) => {
     try {
-        const userLat = req.query.latitude;
-        const userLon = req.query.longitude;
+        const cityName = req.query.cityName;
+       
 
-        const mungedData = await getWeather(userLat, userLon);
+        const mungedData = await getWeather(cityName);
         res.json(mungedData);
     } catch (e) {
         res.status(500).json({error: e.message})
