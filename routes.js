@@ -40,8 +40,8 @@ async function getWeather(lat, lon){
     const forecast = response.body.data.map((day) => {
 
          return{
-            forecast: forecast.weather.description,
-            time: new Date(forecast.ts * 1000),
+            forecast: day.weather.description,
+            time: new Date(day.ts * 1000),
         };
     })
 
