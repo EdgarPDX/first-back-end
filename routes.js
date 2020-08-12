@@ -36,7 +36,7 @@ app.get('/location', async(req, res) => {
 
 async function getWeather(cityName){
     const response = await request.get(`https://api.weatherbit.io/v2.0/forecast/daily?&city=${cityName}&key=${process.env.WEATHER_KEY}`)
-    const forecast = response.body[0]
+    const forecast = response.data[0]
 
         return{
             forecast: forecast.weather.description,
